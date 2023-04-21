@@ -1,10 +1,17 @@
-const gameBoard = () => {
-  const gameboard = Array(9).fill("");
+const gameBoard = (() => {
+  const gameboard = ["", "", "", "", "", "", "", "", ""];
   let win = false;
+  let draw = false;
 
   const getGameboard = () => gameboard;
+  const boardNotFull = () => gameboard.some((val) => val === "");
   const setTile = (mark, index) => {
-    gameBoard[index] = mark;
+    if (!gameboard[index]) {
+      gameboard[index] = mark;
+    }
+    if (!boardNotFull) {
+      draw = true;
+    }
   };
   const checkWinner = (mark) => {
     const winningCombos = [
@@ -28,10 +35,16 @@ const gameBoard = () => {
     return win;
   };
 
-  return { getGameboard, setTile, checkWinner };
+  const checkDraw = () => draw;
+
+  return { getGameboard, setTile, checkWinner, checkDraw };
+})();
+
+const player = (name, mark) => {
+  let winner = false;
+  const setMark = () => {
+    gameBoard.setTile(mark);
+    winner = gameBoard.checkWinner(mark);
+  };
+  return { setMark };
 };
-
-const game = gameBoard();
-
-game.setTile("X", 8);
-console.log(game.checkWinner("X"));
