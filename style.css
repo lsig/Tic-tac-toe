@@ -1,0 +1,38 @@
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+#gameboard {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  height: 30rem;
+  width: 30rem;
+  /* background-color: grey; */
+}
+
+.row {
+  display: flex;
+  height: 33%;
+  width: 100%;
+}
+
+.tile {
+  height: 100%;
+  width: 100%;
+}
+
+#row_one,
+#row_two {
+  border-bottom: 4px black solid;
+}
+
+#t1,
+#t2,
+#t4,
+#t5,
+#t7,
+#t8 {
+  border-left: 4px black solid;
+}

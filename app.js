@@ -40,7 +40,7 @@ const gameBoard = (() => {
   return { getGameboard, setTile, checkWinner, checkDraw };
 })();
 
-const player = (name, mark) => {
+const player = (mark) => {
   let winner = false;
   const setMark = () => {
     gameBoard.setTile(mark);
@@ -48,3 +48,5 @@ const player = (name, mark) => {
   };
   return { setMark };
 };
+
+const displayController = (() => {})();
