@@ -6,18 +6,19 @@ const player = (mark) => {
 const grid = (() => {
   const gameboard = ["", "", "", "", "", "", "", "", ""];
   let count = 0;
-
   let draw = false;
   const player_one = player("X");
   const player_two = player("O");
   const players = [player_one, player_two];
 
   const getGameboard = () => gameboard;
+
   const getPlayer = () => {
     const currentPlayer = players[count];
     return currentPlayer;
   };
   const boardNotFull = () => gameboard.some((val) => val === "");
+
   const setTile = (mark, index) => {
     if (!gameboard[index]) {
       gameboard[index] = mark;
@@ -27,6 +28,7 @@ const grid = (() => {
       draw = true;
     }
   };
+
   const checkWinner = (mark) => {
     let win = false;
     const winningCombos = [
@@ -42,8 +44,6 @@ const grid = (() => {
     winningCombos.forEach((combo) => {
       const playerCombo = combo.map((index) => gameboard[index]);
       const winner = playerCombo.every((val) => val === mark);
-      console.log(playerCombo);
-      console.log(winner);
       if (winner) {
         win = true;
         return;
@@ -55,7 +55,7 @@ const grid = (() => {
 
   const checkDraw = () => draw;
 
-  return { players, getPlayer, getGameboard, setTile, checkWinner, checkDraw };
+  return { getPlayer, getGameboard, setTile, checkWinner, checkDraw };
 })();
 
 const displayController = (() => {
@@ -72,6 +72,7 @@ const displayController = (() => {
       }
 
       grid.setTile(playerMark, tileNumber);
+
       gridElement = createMarkElement(playerMark);
       tile.appendChild(gridElement);
 
@@ -79,12 +80,12 @@ const displayController = (() => {
       const draw = grid.checkDraw();
 
       if (win) {
-        alert(`Congrats, player ${playerMark} won`);
+        winningMessage(playerMark);
         reloadPage();
         return;
       }
       if (draw) {
-        alert("The game is a draw");
+        drawMessage();
         reloadPage();
         return;
       }
@@ -97,6 +98,18 @@ const createMarkElement = (mark) => {
   const elementText = document.createTextNode(mark);
   element.appendChild(elementText);
   return element;
+};
+
+const winningMessage = (mark) => {
+  setTimeout(() => {
+    alert(`Congrats, player ${mark} won`);
+  }, 200);
+};
+
+const drawMessage = () => {
+  setTimeout(() => {
+    alert("The game is a draw");
+  }, 200);
 };
 
 const reloadPage = () => {

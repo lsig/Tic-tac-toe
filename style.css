@@ -1,3 +1,8 @@
+html,
+body {
+  height: 85%;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -19,8 +24,15 @@ body {
 }
 
 .tile {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   height: 100%;
   width: 100%;
+}
+
+h1 {
+  align-self: center;
 }
 
 #row_one,
